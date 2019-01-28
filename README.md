@@ -8,12 +8,13 @@ Comes handy when you want to add manual confirmation before doing something dang
 <!-- toc -->
 
 - [Getting started](#getting-started)
-- [API](#api)
+- [Usage](#usage)
 - [Contributing](#contributing)
   * [Getting started](#getting-started-1)
   * [Test](#test)
   * [Releasing and publishing](#releasing-and-publishing)
 - [License](#license)
+- [Why a fork?](#why-a-fork)
 
 <!-- tocstop -->
 
@@ -40,6 +41,10 @@ Do you really want to blow up the servers? n
 
 $ yarn self-destruct-server
 Do you really want to blow up the servers? y
+servers decommissioned permanently
+
+$ yarn self-destruct-server
+Do you really want to blow up the servers? yes
 servers decommissioned permanently
 ```
 
@@ -75,6 +80,6 @@ MIT
 ---
 ## Why a fork?
 
-The script itself hasn't changed, license was updated from ISC to MIT.
+The script itself hasn't changed much (additionally allows `yes` as well as `y` input), license was updated from ISC to MIT.
 As it is a bad practice to rely on software that isn't maintained, nor should be updated, we made our own `cli-confirm`.
-It's safer as we don't know who could update the original https://github.com/jmtoball/cli-confirm with a 
+It's basically safer as we don't know who could update the original https://github.com/jmtoball/cli-confirm with additional code.
