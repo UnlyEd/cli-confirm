@@ -1,28 +1,51 @@
 {
-  "name": "cli-confirm",
+  "name": "@unly/cli-confirm",
   "version": "1.0.0",
   "description": "Tiny module to confirm execution of npm scripts",
-  "main": "index.js",
+  "repository": "https://github.com/UnlyEd/cli-confirm",
+  "homepage": "https://github.com/UnlyEd/cli-confirm",
+  "author": "UnlyEd",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/UnlyEd/cli-confirm/issues"
+  },
+  "main": "src/index.js",
+  "files": [
+    "/src"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
   "scripts": {
-    "test": "cli-confirm \"Are you sure?\" && echo \"do it\""
+    "lint": "esw src/ --fix --watch",
+    "lint:once": "eslint src/ --fix",
+    "preversion": "yarn lint:once && yarn doc:toc",
+    "postversion": "git push && git push --tags",
+    "prepublishOnly": "yarn publish:preview && node src/index.js \"Do you really want to release a new version? Please check the files that will be publicly released first.\"",
+    "publish:preview": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
+    "release": "yarn bump --prompt --commit --tag --push",
+    "releaseAndPublish": "yarn release && npm publish",
+    "doc:toc": "yarn markdown-toc --maxdepth 4 -i README.md",
+    "test": "node src/index.js \"Are you sure?\" && echo \"Done\""
   },
   "bin": {
-    "cli-confirm": "index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jmtoball/cli-confirm.git"
+    "cli-confirm": "src/index.js"
   },
   "keywords": [
     "npm",
     "scripts",
     "confirm",
+    "node",
+    "cli",
     "prompt"
   ],
-  "author": "Johannes Maximilian Toball",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jmtoball/cli-confirm/issues"
-  },
-  "homepage": "https://github.com/jmtoball/cli-confirm#readme"
+  "devDependencies": {
+    "eslint": "5.12.1",
+    "eslint-config-airbnb-base": "13.1.0",
+    "eslint-plugin-import": "2.15.0",
+    "eslint-watch": "4.0.2",
+    "markdown-toc": "1.2.0",
+    "version-bump-prompt": "4.2.2"
+  }
 }
